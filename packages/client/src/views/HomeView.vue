@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import type { RiskLevel } from '@matchsense/shared'
 import { getPickByRiskLevel } from '@/services/mockData'
 
+const router = useRouter()
 const selectedRisk = ref<RiskLevel>('low')
 const pick = computed(() => getPickByRiskLevel(selectedRisk.value))
 
@@ -15,6 +17,10 @@ const currentDate = computed(() => {
 
 function formatConfidence(confidence: string): string {
   return confidence.charAt(0).toUpperCase() + confidence.slice(1) + ' Confidence'
+}
+
+function viewBreakdown() {
+  router.push(`/bet-breakdown?risk=${selectedRisk.value}`)
 }
 </script>
 
@@ -176,6 +182,7 @@ function formatConfidence(confidence: string): string {
 
         <!-- CTA Button -->
         <button
+          @click="viewBreakdown"
           :class="[
             'w-full py-3 px-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors text-white',
             selectedRisk === 'low' ? 'bg-risk-low hover:bg-risk-low-dark' : 'bg-risk-medium hover:bg-risk-medium-dark'

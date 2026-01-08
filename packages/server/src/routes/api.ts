@@ -1,7 +1,11 @@
 import { Router } from 'express'
 import { pool } from '../db/connection.js'
+import betsRouter from './bets.js'
 
 const router = Router()
+
+// Bet generation routes
+router.use('/bets', betsRouter)
 
 // Example: Get all users
 router.get('/users', async (_req, res) => {
