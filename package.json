@@ -1,0 +1,27 @@
+{
+  "name": "matchsense",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MatchSense fullstack application",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "npm run dev --workspace=@matchsense/client",
+    "dev:server": "npm run dev --workspace=@matchsense/server",
+    "build": "npm run build --workspaces",
+    "build:client": "npm run build --workspace=@matchsense/client",
+    "build:server": "npm run build --workspace=@matchsense/server",
+    "lint": "npm run lint --workspaces --if-present",
+    "db:migrate": "npm run migrate --workspace=@matchsense/server",
+    "db:seed": "npm run seed --workspace=@matchsense/server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+
